@@ -1,0 +1,12 @@
+{
+  "hosting": {
+	  "site": "chae-a7eed",
+    "public": "/",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
+
