@@ -1,21 +1,19 @@
 <script setup>
-  import { ref } from 'vue'
-  const awesome = ref(true)
+import { ref } from 'vue'
+import villager from "@/assets/Villagers.json"
+const villagers = ref(villager)
 
-  function toggleAwesome(v) {
-    awesome.value = !v
-}
-  function isAwesome() {
-    return awesome.value
-}
+const rabbit = ref(villagers.value.filter(item => item.species === 'Rabbit'))
 </script>
 
 <template>
-  <button @click="awesome = ! awesome"> toggle</button>
+<li v-for = "item in rabbit">
+  {{ item.name }} - {{ item.species }}
 
-  <h1 v-if="awesome"> Vue is awesome!</h1>
-  <h1 v-else> Oh no </h1>
-
-  <h4 v-if="isAwesome">v-if TRUE</h4>
-  <h4 v-show="isAwesome">v-show TRUE</h4> 
+<img
+                :src="item.iconImage"
+                width={200}
+                height={200}
+              />
+</li>
 </template>
