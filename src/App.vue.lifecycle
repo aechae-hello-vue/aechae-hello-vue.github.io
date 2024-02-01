@@ -1,0 +1,20 @@
+<script setup>
+import { ref, onUpdated, onMounted, onBeforeUpdate } from 'vue'
+const count = ref(0)
+onUpdated(() => {
+  console.log('onUpdated', document.getElementById('count').textContext)
+})
+
+onMounted(() => {
+  console.log('onMounted', document.getElementById('count').textContext)
+})
+
+onBeforeUpdate(() => {
+  console.log('onBeforeUpdate', document.getElementById('count').textContext)
+})
+</script>
+
+<template>
+  <button id="count" @click="count++"> {{ `^^$count^^` }}</button>
+</template>
+<button @click="say('hello')">Say hello </button>

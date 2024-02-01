@@ -1,19 +1,31 @@
 <script setup>
-import { ref } from 'vue'
-import villager from "@/assets/Villagers.json"
-const villagers = ref(villager)
+import {ref} from 'vue'
+let id = 0
+const newTodo = ref('')
+const todos = ref([
+  { id: id++, issue: 'Backlog' }, { id: id++, issue: 'Todo'},
+  { id: id++, issue: 'Going Hawaii' }
+])
 
-const rabbit = ref(villagers.value.filter(item => item.species === 'Rabbit'))
+function addTodo(){
+  console.log('newTodo', newTodo)
+  todo.value.push({id: id++, issue: newTodo.value})
+}
+
+function remoteTodo(todo) {
+  console.log(todo)
+  todos.value = todos.value.filter((t) => t !== todo)
+}
 </script>
 
 <template>
-<li v-for = "item in rabbit">
-  {{ item.name }} - {{ item.species }}
-
-<img
-                :src="item.iconImage"
-                width={200}
-                height={200}
-              />
-</li>
+  <form @submit.prevent="addTodo">
+    <input v-model="newTodo">
+    <button> 할 일 추가 </button>
+  </form>
+  <ul>
+    <li v-for="todo in todos">
+      {{ todo.issue }} - <button @click="removeTodo(todo)"> Done</button>
+    </li>
+  </ul>
 </template>
