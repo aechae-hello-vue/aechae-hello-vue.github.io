@@ -11,8 +11,10 @@ todoData.value = await res.json()
 }
 function fetchAddId(){
 todoId.value++
-fetchData()
+//fetchData()
 }
+//감시자
+watch(todoId, fetchData)
 fetchData()
 </script>
 
