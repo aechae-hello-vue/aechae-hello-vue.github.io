@@ -1,31 +1,36 @@
 <script setup>
-import {ref} from 'vue'
-let id = 0
-const newTodo = ref('')
-const todos = ref([
-  { id: id++, issue: 'Backlog' }, { id: id++, issue: 'Todo'},
-  { id: id++, issue: 'Going Hawaii' }
-])
+import { ref } from 'vue'
 
-function addTodo(){
-  console.log('newTodo', newTodo)
-  todo.value.push({id: id++, issue: newTodo.value})
+const show = ref(true)
+const list = ref([1,2,3])
+
+function onoff() {
+  show.value = !show.value
 }
 
-function remoteTodo(todo) {
-  console.log(todo)
-  todos.value = todos.value.filter((t) => t !== todo)
+function add(){
+  console.log(list.value.length)
+  list.value.push(list.value.length+1)
+}
+
+function remove() {
+  list.value.pop()
+}
+
+function reverse() {
+  list.value = list.value.slice().reverse()
 }
 </script>
 
 <template>
-  <form @submit.prevent="addTodo">
-    <input v-model="newTodo">
-    <button> 할 일 추가 </button>
-  </form>
-  <ul>
-    <li v-for="todo in todos">
-      {{ todo.issue }} - <button @click="removeTodo(todo)"> Done</button>
-    </li>
-  </ul>
+<button @click="onoff">List 렌더링 ON/OFF </button>
+<button @click="add">List 추가 </button>
+<button @click="remove">List 제거 </button>
+<button @click="reverse">List 뒤집기 </button>
+
+<ul v-if="show">
+<li v-for="item of list">{{ list }} </li>
+</ul>
+<p v-else-if="list.length">List is not empty, but hidden.</p>
+<p v-else>List is empty.</p>
 </template>
